@@ -33,4 +33,35 @@
         }
         echo '</table>';
     }
-?>
+
+    function navi($page, $navi, $baris, $fill = 2, $mulai=0)
+    {
+        $max_page = ceil($baris / $fill) - 1;
+        switch ($navi) {
+            case "<<":
+                $navi = 0;
+                break;
+            case "<":
+                if ($page > 0)
+                    $navi = $page - 1;
+                else
+                    $navi = 0;
+                break;
+            case ">":
+                if ($page < $max_page)
+                    $navi = $page + 1;
+                else
+                    $navi = $max_page;
+                break;
+            case ">>":
+                $navi = $max_page;
+                break;
+        }
+        $mulai = $navi * $fill;
+        return [
+            "navi" => $navi,
+            "mulai" => $mulai,
+            "fill" => $fill
+        ];
+    }
+    ?>
