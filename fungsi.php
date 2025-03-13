@@ -5,6 +5,14 @@
         echo '<table border="1">';
         $hitung = 0;
         foreach ($kol as $k => $v) {
+            if ($k == "gender" && $v == 1)
+                $v = "Laki-laki";
+            else if ($k == "gender" && $v == 0)
+                $v = "Perempuan";
+
+            if ($k == "foto")
+                continue;
+
             if ($hitung % 2 === 0)
                 $warna = "#FFFFFF";
             else
@@ -34,7 +42,7 @@
         echo '</table>';
     }
 
-    function navi($page, $navi, $baris, $fill = 2, $mulai=0)
+    function navi($page, $navi, $baris, $fill = 2, $mulai = 0)
     {
         $max_page = ceil($baris / $fill) - 1;
         switch ($navi) {
