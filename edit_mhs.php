@@ -22,21 +22,21 @@
             ?>
             <tr>
                 <td>NIM</td>
-                <td><input type="text" name="nim" value="<?=$nim ?>" readonly></td>
+                <td><input type="text" name="nim" value="<?= $nim ?>" readonly></td>
             </tr>
             <tr>
                 <td>Nama</td>
-                <td><input type="text" name="nama" value="<?=$nama ?>"></td>
+                <td><input type="text" name="nama" value="<?= $nama ?>"></td>
             </tr>
             <tr>
                 <td>Tgl. Lahir</td>
-                <td><input type="date" name="tgl_lahir" value="<?= $tgl_lahir?>"></td>
+                <td><input type="date" name="tgl_lahir" value="<?= $tgl_lahir ?>"></td>
             </tr>
             <tr>
                 <td>Gender</td>
                 <td>
-                    <input type="radio" name="gender" value="1" <?= ($gender==1)? "checked":""; ?>>Laki-laki
-                    <input type="radio" name="gender" value="0" <?= ($gender==0)? "checked":""; ?>>Perempuan
+                    <input type="radio" name="gender" value="1" <?= ($gender == 1) ? "checked" : ""; ?>>Laki-laki
+                    <input type="radio" name="gender" value="0" <?= ($gender == 0) ? "checked" : ""; ?>>Perempuan
                 </td>
             </tr>
             <tr>
@@ -44,37 +44,37 @@
                 <td>
                     <input type="checkbox" name="bahasa[]" value="Indonesia" <?= in_array("Indonesia", $bhs) ? "checked" : ""; ?>>Indonesia
                     <br>
-                    <input type="checkbox" name="bahasa[]" value="Inggris" <?= in_array("Inggris", $bhs)? "checked":""; ?>>Inggris
+                    <input type="checkbox" name="bahasa[]" value="Inggris" <?= in_array("Inggris", $bhs) ? "checked" : ""; ?>>Inggris
                     <br>
-                    <input type="checkbox" name="bahasa[]" value="Jepang" <?= in_array("Jepang", $bhs)? "checked":""; ?>>Jepang
+                    <input type="checkbox" name="bahasa[]" value="Jepang" <?= in_array("Jepang", $bhs) ? "checked" : ""; ?>>Jepang
                     <br>
-                    <input type="checkbox" name="bahasa[]" value="Mandarin" <?= in_array("Mandarin", $bhs)? "checked":""; ?>>Mandarin
+                    <input type="checkbox" name="bahasa[]" value="Mandarin" <?= in_array("Mandarin", $bhs) ? "checked" : ""; ?>>Mandarin
                     <br>
-                    <input type="checkbox" name="bahasa[]" value="Arab" <?= in_array("Arab", $bhs)? "checked":""; ?>>Arab
+                    <input type="checkbox" name="bahasa[]" value="Arab" <?= in_array("Arab", $bhs) ? "checked" : ""; ?>>Arab
                     <br>
-                    <input type="checkbox" name="bahasa[]" value="Korea" <?= in_array("Korea", $bhs)? "checked":""; ?>>Korea
+                    <input type="checkbox" name="bahasa[]" value="Korea" <?= in_array("Korea", $bhs) ? "checked" : ""; ?>>Korea
                 </td>
             </tr>
             <tr>
                 <td>Warga Negara</td>
                 <td>
                     <select name="warga_negara">
-                        <option value="Indonesia" <?= ($row["warga_negara"]=="Indonesia")?"selected":""; ?>>Indonesia</option>
-                        <option value="Inggris" <?= ($row["warga_negara"]=="Inggris")?"selected":""; ?>>Inggris</option>
-                        <option value="Jepang" <?= ($row["warga_negara"]=="Jepang")?"selected":""; ?>>Jepang</option>
-                        <option value="Mandarin" <?= ($row["warga_negara"]=="Mandarin")?"selected":""; ?>>Mandarin</option>
-                        <option value="Arab" <?= ($row["warga_negara"]=="Arab")?"selected":""; ?>>Arab</option>
-                        <option value="Korea" <?= ($row["warga_negara"]=="Korea")?"selected":""; ?>>Korea</option>
+                        <option value="Indonesia" <?= ($warga_negara == "Indonesia") ? "selected" : ""; ?>>Indonesia</option>
+                        <option value="Inggris" <?= ($warga_negara == "Inggris") ? "selected" : ""; ?>>Inggris</option>
+                        <option value="Jepang" <?= ($warga_negara == "Jepang") ? "selected" : ""; ?>>Jepang</option>
+                        <option value="Mandarin" <?= ($warga_negara == "Mandarin") ? "selected" : ""; ?>>Mandarin</option>
+                        <option value="Arab" <?= ($warga_negara == "Arab") ? "selected" : ""; ?>>Arab</option>
+                        <option value="Korea" <?= ($warga_negara == "Korea") ? "selected" : ""; ?>>Korea</option>
                     </select>
                 </td>
             </tr>
             <tr>
                 <td>Alamat</td>
-                <td><input type="text" name="alamat" value="<?= $row["alamat"] ?>"></td>
+                <td><input type="text" name="alamat" value="<?= $alamat ?>"></td>
             </tr>
             <tr>
                 <td>Kota</td>
-                <td><input type="text" name="kota" value="<?= $row["kota"] ?>"></td>
+                <td><input type="text" name="kota" value="<?= $kota ?>"></td>
             </tr>
             <tr>
                 <td>Foto</td>
@@ -95,9 +95,10 @@
         $bahasa = implode(", ", $bahasa);
         $file_name = "foto/$nim" . ".jpg";
         move_uploaded_file($_FILES["foto"]["tmp_name"], $file_name);
-        if($password == "")
-            $password = $row["password"];
-        $query = "UPDATE mahasiswa SET nama='$nama', tgl_lahir='$tgl_lahir', gender=$gender, bahasa='$bahasa', warga_negara='$warga_negara', alamat='$alamat', kota='$kota', foto='$file_name', password=PASSWORD('$password') WHERE nim='$nim'";
+        if ($password == "")
+            $query = "UPDATE mahasiswa SET nama='$nama', tgl_lahir='$tgl_lahir', gender=$gender, bahasa='$bahasa', warga_negara='$warga_negara', alamat='$alamat', kota='$kota', foto='$file_name' WHERE nim='$nim'";
+        else
+            $query = "UPDATE mahasiswa SET nama='$nama', tgl_lahir='$tgl_lahir', gender=$gender, bahasa='$bahasa', warga_negara='$warga_negara', alamat='$alamat', kota='$kota', foto='$file_name', password=PASSWORD('$password') WHERE nim='$nim'";
         if ($conn->query($query))
             header("Location: tampil_mhs.php");
         else
